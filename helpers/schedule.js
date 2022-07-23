@@ -18,15 +18,15 @@ const round_five = cron.schedule("0 20 * * *", () => {
   storeResult();
 });
 
-const test_round = cron.schedule("16 22 * * *", () => {
+const test_round = cron.schedule("34 23 * * *", () => {
   storeResult();
 });
 
-const test_round_2 = cron.schedule("17 22 * * *", () => {
+const test_round_2 = cron.schedule("35 23  * * *", () => {
   storeResult();
 });
 
-cron.schedule("0 15 22 * * *", async () => {
+cron.schedule("0 33 23 * * *", async () => {
   console.log("Schedule Start Working...");
   round_one.start();
   round_two.start();
