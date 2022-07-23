@@ -38,24 +38,24 @@ const round_five = cron.schedule(
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 
-const test_round = cron.schedule(
-  "45 23 * * *",
-  () => {
-    storeResult("11:11 PM");
-  },
-  { scheduled: true, timezone: "Asia/Yangon" }
-);
+// const test_round = cron.schedule(
+//   "45 23 * * *",
+//   () => {
+//     storeResult("11:11 PM");
+//   },
+//   { scheduled: true, timezone: "Asia/Yangon" }
+// );
 
-const test_round_2 = cron.schedule(
-  "46 23  * * *",
-  () => {
-    storeResult("12:12 PM");
-  },
-  { scheduled: true, timezone: "Asia/Yangon" }
-);
+// const test_round_2 = cron.schedule(
+//   "46 23  * * *",
+//   () => {
+//     storeResult("12:12 PM");
+//   },
+//   { scheduled: true, timezone: "Asia/Yangon" }
+// );
 
 cron.schedule(
-  "0 44 23 * * *",
+  "0 0 0 * * *",
   async () => {
     console.log("Schedule Start Working...");
     round_one.start();
@@ -89,7 +89,6 @@ cron.schedule(
         }
         if (off.time === "5:00 PM") {
           round_four.stop();
-          test_round_2.stop();
           console.log("Today 5:00 PM is closed");
         }
         if (off.time === "8:00 PM") {
