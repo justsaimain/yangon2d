@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  background: #f5f9fc;
+  max-width: 390px;
+  margin: auto;
+  color: #202124;
+}
+
+header {
+  background-color: #202124;
+  padding: 18px;
+}
+
+.main-title {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 1px;
+  font-size: 34px;
+  margin: 0;
+  color: #f5f9fc;
+}
+
+.top-div {
+  background-color: #202124;
+  position: relative;
+  padding-bottom: 60px;
+  margin-bottom: 60px;
+  color: #f5f9fc;
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+/*  login form  */
+.login-form {
+  padding: 0px 48px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(153, 153, 153, 0.05);
+  background-color: #fff;
+  padding: 24px 18px;
+  margin: 0 20px;
+}
+
+.login-form input,
+.close-day-form input {
+  padding: 14px 10px;
+  margin-bottom: 10px;
+  border-color: #202124;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(153, 153, 153, 0.05);
+}
+
+.login-form button,
+.close-day-form button {
+  padding: 10px 18px;
+  background: #202124;
+  color: #f5f9fc;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  align-items: center;
+  width: 100px;
+  margin: 0 auto;
+}
+
+/* panel */
+
+.actions {
+  padding: 0px 18px;
+}
+
+.actions button {
+  padding: 10px;
+  width: 100%;
+  background-color: #fff;
+  outline: none;
+  color: #202124;
+  font-size: 16px;
+  box-shadow: 0 4px 8px 0 rgba(117, 117, 117, 0.05);
+  font-weight: bold;
+  text-align: start;
+  border: 2px solid #202124;
+  margin-bottom: 14px;
+}
+
+.actions button:last-child {
+  border-color: #ff0000;
+  color: #ff0000;
+}
+
+.close-day-table {
+  width: 100%;
+  border: solid 1px #ddeeee;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font: normal 13px Arial, sans-serif;
+}
+
+.close-day-table thead th {
+  background-color: #202124;
+  border: solid 1px #202124;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.close-day-table tbody td {
+  border: solid 1px #202124;
+  color: #333;
+  padding: 10px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+.close-day-table tbody td button {
+  color: #ff0000;
+  background: #fff;
+  border: 1px solid #ff0000;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.close-day-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.close-day-form input {
+  padding: 14px 10px;
+  margin-bottom: 10px;
+  border-color: #202124;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(153, 153, 153, 0.05);
+}

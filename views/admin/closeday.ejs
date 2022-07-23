@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
+    />
+    <title>Yangon 2D | Close Days</title>
+    <link rel="stylesheet" href="../panel.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 class="main-title">Yangon 2D</h1>
+      </div>
+    </header>
+    <main>
+      <div class="top-div" style="margin-bottom: 10px">
+        <div class="page-title">Control Panel</div>
+      </div>
+      <div class="bottom-div" style="padding: 0px 18px">
+        <p>Add New</p>
+        <form action="/panel/close-days" method="post" class="close-day-form">
+          <input type="text" name="date" placeholder="1/12/2022" />
+          <input type="text" name="time" placeholder="12:00 PM" />
+          <button type="submit">Add</button>
+        </form>
+        <p>Close Days</p>
+        <div>
+          <table class="close-day-table" id="close-day-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (data) { %> <% data.forEach(d => { %>
+              <tr>
+                <td><%= d.date %></td>
+                <td><%= d.time %></td>
+                <td>
+                  <button
+                    onclick="deleteCloseDay(this)"
+                    data-id="<%= d._id %>"
+                    data-date="<%= d.date %>"
+                    data-time="<%= d.time %>"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <% }) %> <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      function deleteCloseDay(e) {
+        const id = e.getAttribute("data-id");
+        const date = e.getAttribute("data-date");
+        const time = e.getAttribute("data-time");
+        Swal.fire({
+          icon: "warning",
+          text:
+            "Are you sure to delete close day on " + date + " " + time + "?",
+          showCancelButton: true,
+          confirmButtonText: "Delete",
+          confirmButtonColor: "#ff0000",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let xmlHttp = null;
+            xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("DELETE", "/panel/close-days/" + id, false);
+            xmlHttp.send(null);
+            location.href = "/panel/close-days";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

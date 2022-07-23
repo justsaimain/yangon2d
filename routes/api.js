@@ -3,5 +3,7 @@ const router = Router();
 const api = require("../controllers/api");
 
 router.get("/", api.getIndex);
-
+router.get("/live", api.getLive);
+router.get("/today", api.getTodayResult);
+router.get("/close-days", api.getCloseDays);
 module.exports = router;

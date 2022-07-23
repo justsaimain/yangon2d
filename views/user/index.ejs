@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0 , user-scalable=no"
+    />
     <title>Yangon 2D | Home</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="home.css" />
   </head>
   <body>
     <header>
@@ -16,54 +19,38 @@
     <main>
       <div class="top-div">
         <div class="live-number">
-          <h1>94</h1>
-          <p>Updated 20-07-2022 10:30:00</p>
+          <h1 id="result-data">--</h1>
+          <p id="date-time-data">🕥 Updated 20-07-2022 10:30:00</p>
         </div>
         <div class="live-board">
           <div class="board">
             <h3>BUY</h3>
-            <p>1.4329</p>
+            <p id="buy-data">--</p>
           </div>
           <div class="divider"></div>
           <div class="board">
             <h3>SELL</h3>
-            <p>3.4004</p>
+            <p id="sell-data">--</p>
           </div>
         </div>
       </div>
       <div class="bottom-div">
+        <div class="alert-div">
+          <p>ယခု Website သည် စမ်းသပ်ဆဲ ကာလ ဖြစ်ပါသည်။</p>
+        </div>
         <p>Today Results</p>
         <div class="today-board">
+          <% todayData.forEach(data => { %>
           <div class="today-board-result">
-            <p>&nbsp; 9:00 AM</p>
-            <p>1.4329</p>
-            <p>3.4004</p>
-            <p>94</p>
+            <p>
+              <% if (data.time !== "12:00 PM") { %> &nbsp; <% } %> <%= data.time
+              %>
+            </p>
+            <p><%= data.buy %></p>
+            <p><%= data.sell %></p>
+            <p><%= data.result %></p>
           </div>
-          <div class="today-board-result">
-            <p>12:00 PM</p>
-            <p>1.4329</p>
-            <p>3.4004</p>
-            <p>94</p>
-          </div>
-          <div class="today-board-result">
-            <p>&nbsp; 3:00 PM</p>
-            <p>1.4329</p>
-            <p>3.4004</p>
-            <p>94</p>
-          </div>
-          <div class="today-board-result">
-            <p>&nbsp;5:00 PM</p>
-            <p>1.4329</p>
-            <p>3.4004</p>
-            <p>94</p>
-          </div>
-          <div class="today-board-result">
-            <p>&nbsp; 8:00 PM</p>
-            <p>1.4329</p>
-            <p>3.4004</p>
-            <p>94</p>
-          </div>
+          <% }) %>
         </div>
         <div class="actions">
           <button class="result-btn">
@@ -79,5 +66,23 @@
         </div>
       </div>
     </main>
+    <script>
+      function getLiveData() {
+        let xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "/api/live", false);
+        xmlHttp.send(null);
+        let data = JSON.parse(xmlHttp.response);
+        document.getElementById("buy-data").innerText = data.buy;
+        document.getElementById("sell-data").innerText = data.sell;
+        document.getElementById("result-data").innerText = data.result;
+        document.getElementById("date-time-data").innerText =
+          "🕥 Updated " + data.date_time;
+      }
+
+      setInterval(() => {
+        getLiveData();
+      }, 1000);
+    </script>
   </body>
 </html>
