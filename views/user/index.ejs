@@ -40,7 +40,7 @@
         </div>
         <p>Today Results</p>
         <div class="today-board">
-          <% todayData.forEach(data => { %>
+          <% if (todayData.length > 0) { %> <% todayData.forEach(data => { %>
           <div class="today-board-result">
             <p>
               <% if (data.time !== "12:00 PM") { %> &nbsp; <% } %> <%= data.time
@@ -50,7 +50,11 @@
             <p><%= data.sell %></p>
             <p><%= data.result %></p>
           </div>
-          <% }) %>
+          <% }) %> <% } else {%>
+          <p style="text-align: center; color: #808080">
+            Next result will be out soon...
+          </p>
+          <% } %>
         </div>
         <div class="actions">
           <button class="result-btn">
