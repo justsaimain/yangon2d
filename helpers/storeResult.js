@@ -1,7 +1,7 @@
 const Result = require("../models/Result");
 const generateNumber = require("./generateNumber");
 
-const storeResult = async (date, time) => {
+const storeResult = async (time) => {
   const data = generateNumber();
   console.log("Storing data...");
   console.log(data);
@@ -13,8 +13,8 @@ const storeResult = async (date, time) => {
     buy: data.buy,
     sell: data.sell,
     result: data.result,
-    date: date ? date : dd + "/" + mm + "/" + yyyy,
-    time: time ? time : today.toLocaleTimeString([], { timeStyle: "short" }),
+    date: dd + "/" + mm + "/" + yyyy,
+    time: time,
   });
 
   try {

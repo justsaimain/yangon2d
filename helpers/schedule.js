@@ -5,57 +5,57 @@ const storeResult = require("./storeResult");
 const round_one = cron.schedule(
   "0 9 * * *",
   () => {
-    storeResult();
+    storeResult("9:00 AM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 const round_two = cron.schedule(
   "0 12 * * *",
   () => {
-    storeResult();
+    storeResult("12:00 PM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 const round_three = cron.schedule(
   "0 15 * * *",
   () => {
-    storeResult();
+    storeResult("3:00 PM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 const round_four = cron.schedule(
   "0 17 * * *",
   () => {
-    storeResult();
+    storeResult("5:00 PM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 const round_five = cron.schedule(
   "0 20 * * *",
   () => {
-    storeResult();
+    storeResult("8:00 PM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 
 const test_round = cron.schedule(
-  "39 23 * * *",
+  "45 23 * * *",
   () => {
-    storeResult();
+    storeResult("11:11 PM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 
 const test_round_2 = cron.schedule(
-  "40 23  * * *",
+  "46 23  * * *",
   () => {
-    storeResult();
+    storeResult("12:12 PM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 
 cron.schedule(
-  "0 38 23 * * *",
+  "0 44 23 * * *",
   async () => {
     console.log("Schedule Start Working...");
     round_one.start();
