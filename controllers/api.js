@@ -24,7 +24,7 @@ module.exports.getTodayResult = async (req, res) => {
       Date.parse("1970/01/01 " + b.time.slice(0, -2) + " " + b.time.slice(-2))
     );
   });
-  res.status(200).json(data);
+  res.json(data);
 };
 
 module.exports.getCloseDays = async (req, res) => {

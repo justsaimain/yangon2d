@@ -38,22 +38,6 @@ const round_five = cron.schedule(
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 
-// const test_round = cron.schedule(
-//   "45 23 * * *",
-//   () => {
-//     storeResult("11:11 PM");
-//   },
-//   { scheduled: true, timezone: "Asia/Yangon" }
-// );
-
-// const test_round_2 = cron.schedule(
-//   "46 23  * * *",
-//   () => {
-//     storeResult("12:12 PM");
-//   },
-//   { scheduled: true, timezone: "Asia/Yangon" }
-// );
-
 cron.schedule(
   "0 0 0 * * *",
   async () => {
@@ -63,8 +47,6 @@ cron.schedule(
     round_three.start();
     round_four.start();
     round_five.start();
-    test_round.start();
-    test_round_2.start();
 
     const closeDays = await CloseDay.find();
     const today = new Date();

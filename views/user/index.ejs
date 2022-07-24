@@ -71,6 +71,16 @@
       </div>
     </main>
     <script>
+      function onTheHourFunction() {
+        const time = date.toLocaleString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        });
+        console.log("Time : " + time);
+        getTodayData();
+      }
+
       function getLiveData() {
         let xmlHttp = null;
         xmlHttp = new XMLHttpRequest();
@@ -84,9 +94,62 @@
           "🕥 Updated " + data.date_time;
       }
 
+      function getTodayData() {
+        let xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "/api/today", false);
+        xmlHttp.send(null);
+        let data = JSON.parse(xmlHttp.response);
+        console.log("Working on exactly on hour");
+        console.log("Today data", data);
+        location.href = "/";
+      }
+
+      setInterval(function () {
+        const date = new Date();
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        const second = date.getSeconds();
+        if (
+          hour.toString() === "9" &&
+          minute.toString() === "0" &&
+          second.toString() === "0"
+        ) {
+          onTheHourFunction();
+        }
+        if (
+          hour.toString() === "12" &&
+          minute.toString() === "0" &&
+          second.toString() === "0"
+        ) {
+          onTheHourFunction();
+        }
+        if (
+          hour.toString() === "15" &&
+          minute.toString() === "0" &&
+          second.toString() === "0"
+        ) {
+          onTheHourFunction();
+        }
+        if (
+          hour.toString() === "17" &&
+          minute.toString() === "0" &&
+          second.toString() === "0"
+        ) {
+          onTheHourFunction();
+        }
+        if (
+          hour.toString() === "20" &&
+          minute.toString() === "0" &&
+          second.toString() === "0"
+        ) {
+          onTheHourFunction();
+        }
+      }, 1000);
+
       setInterval(() => {
         getLiveData();
-      }, 1000);
+      }, 5000);
     </script>
   </body>
 </html>
