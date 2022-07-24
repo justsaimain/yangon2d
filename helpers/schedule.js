@@ -1,6 +1,9 @@
 const cron = require("node-cron");
 const CloseDay = require("../models/CloseDay");
 const storeResult = require("./storeResult");
+const cronitor = require("cronitor")("1d45529fda334b4494186871c5288edc");
+
+cronitor.wraps(cron);
 
 const round_one = cron.schedule(
   "0 9 * * *",
@@ -39,7 +42,7 @@ const round_five = cron.schedule(
 );
 
 cron.schedule(
-  "0 0 0 * * *",
+  "0 * * * *",
   async () => {
     console.log("Schedule Start Working...");
     round_one.start();

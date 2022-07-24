@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "body-parser": "^1.20.0",
+    "cronitor": "^2.3.2",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
