@@ -31,3 +31,8 @@ module.exports.getCloseDays = async (req, res) => {
   const data = await CloseDay.find().sort({ createdAt: -1 });
   res.status(200).json(data);
 };
+
+module.exports.getAlertText = async (req, res) => {
+  const data = await AlertDoc.findOne().sort({ createdAt: -1 });
+  res.status(200).json(data);
+};

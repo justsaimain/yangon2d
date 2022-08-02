@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
+    />
+    <title>Yangon 2D | Next Result</title>
+    <link rel="stylesheet" href="../panel.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 class="main-title">Yangon 2D</h1>
+      </div>
+    </header>
+    <main>
+      <div class="top-div" style="margin-bottom: 10px">
+        <div class="page-title">Control Panel</div>
+      </div>
+
+      <div class="bottom-div" style="padding: 0px 18px">
+        <p>Add / Update Next</p>
+        <form action="/panel/next" method="post" class="close-day-form">
+          <input type="text" name="buy" placeholder="Buy" value="111" />
+          <input type="text" name="sell" placeholder="Sell" value="222" />
+          <button type="submit" style="width: 130px">Add / Update</button>
+        </form>
+        <p>Upcoming Result</p>
+        <table
+          style="margin-top: 20px"
+          class="close-day-table"
+          id="close-day-table"
+        >
+          <thead>
+            <tr>
+              <th>Buy</th>
+              <th>Sell</th>
+              <th>2D</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= data ? "1." + data.buy : "-" %></td>
+              <td><%= data ? "3." + data.sell : "-" %></td>
+              <td>
+                <%= data ? data.buy.slice(-1) + data.sell.slice(-1): "-" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,3 +1,4 @@
+const Alert = require("../models/Alert");
 const CloseDay = require("../models/CloseDay");
 const Result = require("../models/Result");
 
@@ -16,5 +17,7 @@ module.exports.getIndex = async (req, res) => {
     );
   });
 
-  res.render("user/index", { todayData: data });
+  const alert = await Alert.findOne().sort({ createdAt: -1 });
+
+  res.render("user/index", { todayData: data, alert: alert.text });
 };

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
+    />
+    <title>Yangon 2D | Alert Text</title>
+    <link rel="stylesheet" href="../panel.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 class="main-title">Yangon 2D</h1>
+      </div>
+    </header>
+    <main>
+      <div class="top-div" style="margin-bottom: 10px">
+        <div class="page-title">Control Panel</div>
+      </div>
+      <div class="bottom-div" style="padding: 0px 18px">
+        <p>Add / Update Alert</p>
+
+        <form action="/panel/alert" method="post" class="close-day-form">
+          <input
+            type="text"
+            name="alert"
+            placeholder="<% if (data) { %> <%= data %>  <% } else { %> Empty data will be hidden <% } %>"
+            value="<%if(data){%><%=data%><%}%>"
+          />
+          <button type="submit" style="width: 130px">Add / Update</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

@@ -4,7 +4,10 @@ const jwtKey = process.env.TOKEN_SECRET;
 const jwtExpirySeconds = 300; // second
 const localStorage = require("localStorage");
 const CloseDay = require("../models/CloseDay");
+const AlertDoc = require("../models/Alert");
 const { default: mongoose } = require("mongoose");
+const moment = require("moment");
+const Next = require("../models/Next");
 
 module.exports.getIndex = async (req, res) => {
   res.render("admin/index");
@@ -89,4 +92,119 @@ module.exports.deleteCloseDay = async (req, res) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+module.exports.getAlert = async (req, res) => {
+  const data = await AlertDoc.findOne().sort({ createdAt: -1 });
+  res.render("admin/alert", { data: data.text });
+};
+
+module.exports.postAlert = async (req, res) => {
+  const query = {},
+    update = { text: req.body.alert ? req.body.alert : null },
+    options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  AlertDoc.findOneAndUpdate(query, update, options, function (error, result) {
+    if (error) return;
+    res.redirect("/panel/alert");
+  });
+};
+
+module.exports.getNext = async (req, res) => {
+  const data = await Next.findOne();
+  console.log("data", data);
+  res.render("admin/next", { data });
+};
+
+module.exports.postNext = async (req, res) => {
+  const { sell, buy } = req.body;
+  const currentDateTime = moment(new Date()).format("MMMM D YYYY, H:mm:ss");
+  const showTime = [
+    moment()
+      .set({ hour: 9, minute: 0, second: 0, millisecond: 0 })
+      .format("MMMM D YYYY, H:mm:ss"),
+    moment()
+      .set({ hour: 12, minute: 0, second: 0, millisecond: 0 })
+      .format("MMMM D YYYY, H:mm:ss"),
+    moment()
+      .set({ hour: 15, minute: 0, second: 0, millisecond: 0 })
+      .format("MMMM D YYYY, H:mm:ss"),
+    moment()
+      .set({ hour: 17, minute: 0, second: 0, millisecond: 0 })
+      .format("MMMM D YYYY, H:mm:ss"),
+    moment()
+      .set({ hour: 20, minute: 0, second: 0, millisecond: 0 })
+      .format("MMMM D YYYY, H:mm:ss"),
+  ];
+
+  let showDateTime;
+
+  console.log("current date time", currentDateTime);
+  console.log("show date time", showTime);
+
+  if (new Date(currentDateTime) >= new Date(showTime[4])) {
+    showDateTime = moment()
+      .set({ hour: 9, minute: 0, second: 0, millisecond: 0 })
+      .add(1, "days")
+      .subtract(1, "minutes")
+      .format("MMMM D YYYY, H:mm:ss");
+    console.log(
+      "🚨 load static data for tomorrow 9 AM before 1 minutes : 8:59 AM"
+    );
+  } else if (new Date(currentDateTime) >= new Date(showTime[3])) {
+    showDateTime = moment()
+      .set({ hour: 20, minute: 0, second: 0, millisecond: 0 })
+      .subtract(1, "minutes")
+      .format("MMMM D YYYY, H:mm:ss");
+    console.log("🚨 load static data for 8 PM before 1 minutes : 7:59 PM");
+  } else if (new Date(currentDateTime) >= new Date(showTime[2])) {
+    showDateTime = moment()
+      .set({ hour: 17, minute: 0, second: 0, millisecond: 0 })
+      .subtract(1, "minutes")
+      .format("MMMM D YYYY, H:mm:ss");
+    console.log("🚨 load static data for 5 PM before 1 minutes : 4:59 PM");
+  } else if (new Date(currentDateTime) >= new Date(showTime[1])) {
+    showDateTime = moment()
+      .set({ hour: 15, minute: 0, second: 0, millisecond: 0 })
+      .subtract(1, "minutes")
+      .format("MMMM D YYYY, H:mm:ss");
+    console.log("🚨 load static data for 3 PM before 1 minutes : 2:59 PM");
+  } else if (new Date(currentDateTime) >= new Date(showTime[0])) {
+    showDateTime = moment()
+      .set({ hour: 12, minute: 0, second: 0, millisecond: 0 })
+      .subtract(1, "minutes")
+      .format("MMMM D YYYY, H:mm:ss");
+    console.log("🚨 load static data for 12 PM before 1 minutes : 11:59 AM");
+  } else {
+    showDateTime = moment()
+      .set({ hour: 9, minute: 0, second: 0, millisecond: 0 })
+      .subtract(1, "minutes")
+      .format("MMMM D YYYY, H:mm:ss");
+    console.log("🚨 load static data for 9 AM before 1 minutes : 8:59 AM");
+  }
+
+  const deleteDateTime = moment(new Date(showDateTime))
+    .add(3, "minutes")
+    .format("MMMM D YYYY, H:mm:ss");
+
+  var query = {},
+    update = {
+      sell,
+      buy,
+      show_date_time: showDateTime,
+      delete_date_time: deleteDateTime,
+    },
+    options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  Next.findOneAndUpdate(query, update, options, function (error, result) {
+    if (error) return;
+    console.log("res", result);
+    res.redirect("/panel/next");
+  });
+};
+
+module.exports.deleteNext = async (req, res) => {
+  await Next.deleteMany({}).then(() => {
+    res.redirect("/panel/next");
+  });
 };

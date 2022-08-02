@@ -6,4 +6,5 @@ router.get("/", api.getIndex);
 router.get("/live", api.getLive);
 router.get("/today", api.getTodayResult);
 router.get("/close-days", api.getCloseDays);
+router.get("/alert", api.getAlertText);
 module.exports = router;

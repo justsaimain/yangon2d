@@ -41,47 +41,62 @@ const round_five = cron.schedule(
   { scheduled: true, timezone: "Asia/Yangon" }
 );
 
-cron.schedule(
-  "0 * * * *",
-  async () => {
-    console.log("Schedule Start Working...");
-    round_one.start();
-    round_two.start();
-    round_three.start();
-    round_four.start();
-    round_five.start();
-
-    const closeDays = await CloseDay.find();
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const yyyy = today.getFullYear();
-    const date = dd + "/" + mm + "/" + yyyy;
-
-    closeDays.forEach((off) => {
-      if (off.date === date) {
-        if (off.time === "9:00 AM") {
-          round_one.stop();
-          console.log("Today 9:00 AM is closed");
-        }
-        if (off.time === "12:00 PM") {
-          round_two.stop();
-          console.log("Today 12:00 PM is closed");
-        }
-        if (off.time === "3:00 PM") {
-          round_three.stop();
-          console.log("Today 3:00 PM is closed");
-        }
-        if (off.time === "5:00 PM") {
-          round_four.stop();
-          console.log("Today 5:00 PM is closed");
-        }
-        if (off.time === "8:00 PM") {
-          round_five.stop();
-          console.log("Today 8:00 PM is closed");
-        }
-      }
-    });
+const test_round = cron.schedule(
+  "32 22 * * *",
+  () => {
+    storeResult("10:32 PM");
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
+
+const test_round2 = cron.schedule(
+  "26 22 * * *",
+  () => {
+    storeResult("10:26 PM");
+  },
+  { scheduled: true, timezone: "Asia/Yangon" }
+);
+
+round_one.start();
+round_two.start();
+round_three.start();
+round_four.start();
+round_five.start();
+round_five.start();
+test_round.start();
+test_round2.start();
+
+CloseDay.find().then((res) => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+  const date = dd + "/" + mm + "/" + yyyy;
+
+  // console.log("Close Day > ", res);
+  res.forEach((off) => {
+    if (off.date === date) {
+      if (off.time === "9:00 AM") {
+        round_one.stop();
+        console.log("Today 9:00 AM is closed");
+      }
+      if (off.time === "12:00 PM") {
+        round_two.stop();
+        console.log("Today 12:00 PM is closed");
+      }
+      if (off.time === "3:00 PM") {
+        round_three.stop();
+        console.log("Today 3:00 PM is closed");
+      }
+      if (off.time === "5:00 PM") {
+        round_four.stop();
+        test_round2.stop();
+        console.log("Today 5:00 PM is closed");
+      }
+      if (off.time === "8:00 PM") {
+        round_five.stop();
+        console.log("Today 8:00 PM is closed");
+      }
+    }
+  });
+});
