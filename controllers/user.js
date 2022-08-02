@@ -19,5 +19,8 @@ module.exports.getIndex = async (req, res) => {
 
   const alert = await Alert.findOne().sort({ createdAt: -1 });
 
-  res.render("user/index", { todayData: data, alert: alert.text });
+  res.render("user/index", {
+    todayData: data,
+    alert: alert ? alert.text : null,
+  });
 };
