@@ -96,7 +96,7 @@ module.exports.deleteCloseDay = async (req, res) => {
 
 module.exports.getAlert = async (req, res) => {
   const data = await AlertDoc.findOne().sort({ createdAt: -1 });
-  res.render("admin/alert", { data: data.text });
+  res.render("admin/alert", { data: data?.text });
 };
 
 module.exports.postAlert = async (req, res) => {

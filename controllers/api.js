@@ -50,7 +50,6 @@ module.exports.getLive = async (req, res) => {
         returnData = generateNumber();
       }
     } else {
-      console.log("✅ Show result of random... from no next");
       let returnData = generateNumber();
       res.status(200).json(returnData);
     }
