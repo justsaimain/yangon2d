@@ -6,6 +6,7 @@ const adminMiddleware = require("../middlewares/admin");
 
 router.get("/login", admin.getLogin);
 router.post("/login", admin.postLogin);
+
 router.use(adminMiddleware);
 
 router.get("/", admin.getIndex);
