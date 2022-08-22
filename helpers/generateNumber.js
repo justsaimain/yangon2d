@@ -1,5 +1,6 @@
 const seedRandom = require("seedrandom");
 const moment = require("moment");
+const Next = require("../models/Next");
 
 const generateNumber = () => {
   const interval = 60 * 123458;

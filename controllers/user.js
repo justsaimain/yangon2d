@@ -9,7 +9,7 @@ module.exports.getIndex = async (req, res) => {
   const yyyy = today.getFullYear();
   const fullDate = dd + "/" + mm + "/" + yyyy;
   const data = await Result.find({ date: fullDate });
-  // const closeDays = await CloseDay.find({ date: fullDate });
+
   data.sort(function (a, b) {
     return (
       Date.parse("1970/01/01 " + a.time.slice(0, -2) + " " + a.time.slice(-2)) -

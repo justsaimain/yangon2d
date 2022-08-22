@@ -1,14 +1,60 @@
 const generateNumber = require("../helpers/generateNumber");
 const CloseDay = require("../models/CloseDay");
+const Next = require("../models/Next");
 const Result = require("../models/Result");
+const moment = require("moment");
 
 module.exports.getIndex = async (req, res) => {
   res.send("API Index Page");
 };
 
 module.exports.getLive = async (req, res) => {
-  const data = generateNumber();
-  res.status(200).json(data);
+  const currentDateTime = moment(new Date()).format("D-MM-YYYY H:mm:ss");
+  const currentDateTimeForCompare = moment(new Date()).format(
+    "MMMM D YYYY, H:mm:ss"
+  );
+
+  Next.find().then((result) => {
+    if (result.length > 0) {
+      const data = result[0];
+      console.log("current > ", new Date(currentDateTimeForCompare));
+      console.log("show data time > ", new Date(data.show_date_time));
+      console.log("delete data time > ", new Date(data.delete_date_time));
+      if (
+        new Date(currentDateTimeForCompare) >= new Date(data.show_date_time) &&
+        new Date(currentDateTimeForCompare) < new Date(data.delete_date_time)
+      ) {
+        console.log("✅ Show result of next...");
+
+        returnData = {
+          buy: "1." + data.buy,
+          sell: "3." + data.sell,
+          result: data.buy.slice(-1) + data.sell.slice(-1),
+          date_time: currentDateTime,
+        };
+
+        console.log("return data > ", returnData);
+      } else if (
+        new Date(currentDateTimeForCompare) > new Date(data.delete_date_time)
+      ) {
+        console.log("✅ Delete result of next...");
+        Next.deleteOne({ _id: data._id })
+          .then(() => {
+            returnData = generateNumber();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        console.log("✅ Show result of random...");
+        returnData = generateNumber();
+      }
+    } else {
+      console.log("✅ Show result of random... from no next");
+      let returnData = generateNumber();
+      res.status(200).json(returnData);
+    }
+  });
 };
 
 module.exports.getTodayResult = async (req, res) => {
