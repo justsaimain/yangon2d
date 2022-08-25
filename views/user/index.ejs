@@ -78,6 +78,8 @@
       </div>
     </main>
     <script>
+      getTodayData();
+
       function onTheHourFunction() {
         var date = new Date();
         const time = date.toLocaleString("en-US", {
@@ -110,7 +112,6 @@
         let data = JSON.parse(xmlHttp.response);
         console.log("Working on exactly on hour");
         console.log("Today data", data);
-        location.href = "/";
       }
 
       setInterval(function () {
