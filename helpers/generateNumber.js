@@ -4,7 +4,7 @@ const Next = require("../models/Next");
 
 const generateNumber = () => {
   const interval = 60 * 123458;
-  const currentDateTime = moment(new Date()).format("D-MM-YYYY H:mm:ss");
+  const currentDateTime = moment(new Date()).format("D-MM-YYYY hh:mm:ss A");
 
   const randomGenerate1 = seedRandom(
     Math.floor(((new Date().getTime() * new Date().getDate()) / interval) * 60)

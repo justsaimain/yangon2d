@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
     />
-    <title>Yangon 2D | Next Result</title>
+    <title>Yangon 2D | Result</title>
     <link rel="stylesheet" href="../panel.css" />
   </head>
   <body>
@@ -22,13 +22,7 @@
       </div>
 
       <div class="bottom-div" style="padding: 0px 18px">
-        <p>Add / Update Next</p>
-        <form action="/panel/next" method="post" class="close-day-form">
-          <input type="text" name="buy" placeholder="Buy Eg: 111" />
-          <input type="text" name="sell" placeholder="Sell Eg: 222" />
-          <button type="submit" style="width: 130px">Add / Update</button>
-        </form>
-        <p>Upcoming Result</p>
+        <p>Results</p>
         <table
           style="margin-top: 20px"
           class="close-day-table"
@@ -43,20 +37,22 @@
             </tr>
           </thead>
           <tbody>
-            <% if (data) { %>
+            <% if (data) { %> <% data.forEach(d => { %>
             <tr>
-              <td><%= data ? "1." + data.buy : "-" %></td>
-              <td><%= data ? "3." + data.sell : "-" %></td>
+              <td><%= d.date %></td>
+              <td><%= d.time %></td>
               <td>
-                <%= data ? data.buy.slice(-1) + data.sell.slice(-1): "-" %>
-              </td>
-              <td>
-                <button onclick="deleteNext(this)" data-id="<%= data._id %>">
+                <button
+                  onclick="deleteCloseDay(this)"
+                  data-id="<%= d._id %>"
+                  data-date="<%= d.date %>"
+                  data-time="<%= d.time %>"
+                >
                   Delete
                 </button>
               </td>
             </tr>
-            <% } %>
+            <% }) %> <% } %>
           </tbody>
         </table>
       </div>

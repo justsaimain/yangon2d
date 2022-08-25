@@ -1,6 +1,6 @@
 const Alert = require("../models/Alert");
-const CloseDay = require("../models/CloseDay");
 const Result = require("../models/Result");
+const _ = require("lodash");
 
 module.exports.getIndex = async (req, res) => {
   const today = new Date();
@@ -23,4 +23,16 @@ module.exports.getIndex = async (req, res) => {
     todayData: data,
     alert: alert ? alert.text : null,
   });
+};
+
+module.exports.getResult = async (req, res) => {
+  const data = await Result.find();
+
+  const grouped = _.mapValues(_.groupBy(data, "date"), (dList) =>
+    dList.map((d) => _.omit(d, "date"))
+  );
+
+  const dateList = _.uniqBy(_.map(data, "date"));
+
+  res.render("user/result", { results: grouped, date: dateList });
 };

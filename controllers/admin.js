@@ -8,6 +8,7 @@ const AlertDoc = require("../models/Alert");
 const { default: mongoose } = require("mongoose");
 const moment = require("moment");
 const Next = require("../models/Next");
+const Result = require("../models/Result");
 
 module.exports.getIndex = async (req, res) => {
   res.render("admin/index");
@@ -204,7 +205,37 @@ module.exports.postNext = async (req, res) => {
 };
 
 module.exports.deleteNext = async (req, res) => {
-  await Next.deleteMany({}).then(() => {
-    res.redirect("/panel/next");
-  });
+  const id = mongoose.Types.ObjectId(req.params.id);
+
+  try {
+    await Next.deleteOne({ _id: id })
+      .then((result) => {
+        console.log(result);
+        res.json({ success: true });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.json({ success: false });
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports.getResult = async (req, res) => {
+  const data = await Result.find().sort({ created_at: -1 });
+  console.log("result", data);
+  res.render("admin/result", { data });
+};
+
+module.exports.addResultPage = async (req, res) => {};
+
+module.exports.addResult = async (req, res) => {};
+
+module.exports.updateResult = async (req, res) => {
+  res.render("admin/result");
+};
+
+module.exports.deleteResult = async (req, res) => {
+  res.render("admin/result");
 };

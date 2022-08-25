@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0 , user-scalable=no"
+    />
+    <title>Yangon 2D | Result</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 onclick="window.location.href = '/'" class="main-title">
+          Yangon 2D
+        </h1>
+      </div>
+    </header>
+    <main style="margin-top: 20px">
+      <% if (date.length > 0) { %> <% date.forEach(d => { %>
+      <div class="today-board" style="margin-bottom: 20px">
+        <p style="text-align: center; letter-spacing: 0.5px">
+          <%= d.replaceAll('/', "-") %>
+        </p>
+        <hr style="color: #202124; opacity: 20%" />
+        <% results[d].forEach(r => { %>
+        <div class="today-board-result">
+          <p><% if (r.time !== "12:00 PM") { %> &nbsp; <% } %> <%= r.time %></p>
+          <p><%= r.buy %></p>
+          <p><%= r.sell %></p>
+          <p><%= r.result %></p>
+        </div>
+        <% }) %>
+      </div>
+      <% }) %> <% } %>
+    </main>
+  </body>
+</html>

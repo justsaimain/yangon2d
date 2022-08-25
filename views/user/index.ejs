@@ -13,14 +13,16 @@
   <body>
     <header>
       <div>
-        <h1 class="main-title">Yangon 2D</h1>
+        <h1 onclick="window.location.href = '/'" class="main-title">
+          Yangon 2D
+        </h1>
       </div>
     </header>
     <main>
       <div class="top-div">
         <div class="live-number">
           <h1 id="result-data">--</h1>
-          <p id="date-time-data">🕥 Updated 20-07-2022 10:30:00</p>
+          <p id="date-time-data">🕥 Updated 20-07-2022 10:30:00 AM</p>
         </div>
         <div class="live-board">
           <div class="board">
@@ -59,7 +61,10 @@
           <% } %>
         </div>
         <div class="actions">
-          <button class="result-btn">
+          <button
+            class="result-btn"
+            onclick="window.location.href = '/results'"
+          >
             <img
               style="margin-right: 10px"
               src="voting.png"

@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
     />
-    <title>Yangon 2D | Next Result</title>
+    <title>Yangon 2D | Add Result</title>
     <link rel="stylesheet" href="../panel.css" />
   </head>
   <body>
@@ -22,43 +22,12 @@
       </div>
 
       <div class="bottom-div" style="padding: 0px 18px">
-        <p>Add / Update Next</p>
-        <form action="/panel/next" method="post" class="close-day-form">
-          <input type="text" name="buy" placeholder="Buy Eg: 111" />
-          <input type="text" name="sell" placeholder="Sell Eg: 222" />
-          <button type="submit" style="width: 130px">Add / Update</button>
+        <p>Add Result</p>
+        <form action="/panel/results" method="post" class="close-day-form">
+          <input type="text" name="date" placeholder="1/12/2022" />
+          <input type="text" name="time" placeholder="12:00 PM" />
+          <button type="submit">Add</button>
         </form>
-        <p>Upcoming Result</p>
-        <table
-          style="margin-top: 20px"
-          class="close-day-table"
-          id="close-day-table"
-        >
-          <thead>
-            <tr>
-              <th>Buy</th>
-              <th>Sell</th>
-              <th>2D</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if (data) { %>
-            <tr>
-              <td><%= data ? "1." + data.buy : "-" %></td>
-              <td><%= data ? "3." + data.sell : "-" %></td>
-              <td>
-                <%= data ? data.buy.slice(-1) + data.sell.slice(-1): "-" %>
-              </td>
-              <td>
-                <button onclick="deleteNext(this)" data-id="<%= data._id %>">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <% } %>
-          </tbody>
-        </table>
       </div>
     </main>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
