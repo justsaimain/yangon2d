@@ -6,7 +6,8 @@ const localStorage = require("localStorage");
 const CloseDay = require("../models/CloseDay");
 const AlertDoc = require("../models/Alert");
 const { default: mongoose } = require("mongoose");
-const moment = require("moment");
+const moment = require("moment-timezone");
+
 const Next = require("../models/Next");
 const Result = require("../models/Result");
 

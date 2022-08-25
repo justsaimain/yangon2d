@@ -1,5 +1,5 @@
 const seedRandom = require("seedrandom");
-const moment = require("moment");
+const moment = require("moment-timezone");
 const Next = require("../models/Next");
 
 const generateNumber = () => {

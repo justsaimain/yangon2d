@@ -2,7 +2,7 @@ const generateNumber = require("../helpers/generateNumber");
 const CloseDay = require("../models/CloseDay");
 const Next = require("../models/Next");
 const Result = require("../models/Result");
-const moment = require("moment");
+const moment = require("moment-timezone");
 const _ = require("lodash");
 
 module.exports.getIndex = async (req, res) => {
