@@ -10,10 +10,12 @@ module.exports.getIndex = async (req, res) => {
 };
 
 module.exports.getLive = async (req, res) => {
-  const currentDateTime = moment(new Date()).format("D-MM-YYYY hh:mm:ss A");
-  const currentDateTimeForCompare = moment(new Date()).format(
-    "MMMM D YYYY, H:mm:ss"
-  );
+  const currentDateTime = moment(new Date())
+    .tz("Asia/Yangon")
+    .format("D-MM-YYYY hh:mm:ss A");
+  const currentDateTimeForCompare = moment(new Date())
+    .tz("Asia/Yangon")
+    .format("MMMM D YYYY, H:mm:ss");
 
   Next.find().then((result) => {
     if (result.length > 0) {

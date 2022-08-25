@@ -119,7 +119,9 @@ module.exports.getNext = async (req, res) => {
 
 module.exports.postNext = async (req, res) => {
   const { sell, buy } = req.body;
-  const currentDateTime = moment(new Date()).format("MMMM D YYYY, H:mm:ss");
+  const currentDateTime = moment(new Date())
+    .tz("Asia/Yangon")
+    .format("MMMM D YYYY, H:mm:ss");
   const showTime = [
     moment()
       .set({ hour: 9, minute: 0, second: 0, millisecond: 0 })
