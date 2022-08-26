@@ -30,8 +30,8 @@
         >
           <thead>
             <tr>
-              <th>Buy</th>
-              <th>Sell</th>
+              <th>Date</th>
+              <th>Time</th>
               <th>2D</th>
               <th></th>
             </tr>
@@ -41,9 +41,17 @@
             <tr>
               <td><%= d.date %></td>
               <td><%= d.time %></td>
+              <td><%= d.result %></td>
               <td>
                 <button
-                  onclick="deleteCloseDay(this)"
+                  style="border-color: #189a0a; color: #189a0a"
+                  onclick="editResult(this)"
+                  data-id="<%= d._id %>"
+                >
+                  Edit
+                </button>
+                <button
+                  onclick="deleteResult(this)"
                   data-id="<%= d._id %>"
                   data-date="<%= d.date %>"
                   data-time="<%= d.time %>"
@@ -60,11 +68,18 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-      function deleteNext(e) {
+      function editResult(e) {
         const id = e.getAttribute("data-id");
+        location.href = "/panel/results/" + id;
+      }
+
+      function deleteResult(e) {
+        const id = e.getAttribute("data-id");
+        const date = e.getAttribute("data-date");
+        const time = e.getAttribute("data-time");
         Swal.fire({
           icon: "warning",
-          text: "Are you sure to delete next result?",
+          text: `Are you sure to delete ${date} : ${time} result?`,
           showCancelButton: true,
           confirmButtonText: "Delete",
           confirmButtonColor: "#ff0000",
@@ -72,9 +87,9 @@
           if (result.isConfirmed) {
             let xmlHttp = null;
             xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("DELETE", "/panel/next/" + id, false);
+            xmlHttp.open("DELETE", "/panel/results/" + id, false);
             xmlHttp.send(null);
-            location.href = "/panel/next";
+            location.href = "/panel/results";
           }
         });
       }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
+    />
+    <title>Yangon 2D | Edit Result</title>
+    <link rel="stylesheet" href="../../panel.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 class="main-title">Yangon 2D</h1>
+      </div>
+    </header>
+    <main>
+      <div class="top-div" style="margin-bottom: 10px">
+        <div class="page-title">Control Panel</div>
+      </div>
+
+      <div class="bottom-div" style="padding: 0px 18px">
+        <p>Edit Result</p>
+        <% if (data) { %>
+        <form
+          action="/panel/results/update"
+          method="post"
+          class="close-day-form"
+        >
+          <input
+            type="text"
+            name="_id"
+            hidden
+            readonly
+            value="<%= data._id %>"
+          />
+          <input
+            type="text"
+            name="buy"
+            value="<%= data.buy %>"
+            placeholder="Buy Eg: 1111"
+          />
+          <input
+            type="text"
+            name="sell"
+            value="<%= data.sell %>"
+            placeholder="Sell Eg: 2222"
+          />
+          <input
+            type="text"
+            name="result"
+            value="<%= data.result %>"
+            placeholder="Result Eg: 12"
+          />
+          <button type="submit" style="width: 130px">Add / Update</button>
+        </form>
+        <% } %>
+      </div>
+    </main>
+
+    <script></script>
+  </body>
+</html>

@@ -34,8 +34,12 @@
           <button onclick="location.href='/panel/results'">
             update / delete result history
           </button>
-          <button>add result manually</button>
-          <button>logout from panel</button>
+          <button onclick="location.href='/panel/results/add'">
+            add result manually
+          </button>
+          <form action="/panel/logout" method="post">
+            <button type="submit" id="logout-btn">logout from panel</button>
+          </form>
         </div>
       </div>
     </main>

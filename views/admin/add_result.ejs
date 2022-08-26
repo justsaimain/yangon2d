@@ -8,7 +8,7 @@
       content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
     />
     <title>Yangon 2D | Add Result</title>
-    <link rel="stylesheet" href="../panel.css" />
+    <link rel="stylesheet" href="../../panel.css" />
   </head>
   <body>
     <header>
@@ -23,34 +23,17 @@
 
       <div class="bottom-div" style="padding: 0px 18px">
         <p>Add Result</p>
-        <form action="/panel/results" method="post" class="close-day-form">
+        <form action="/panel/results/add" method="post" class="close-day-form">
           <input type="text" name="date" placeholder="1/12/2022" />
           <input type="text" name="time" placeholder="12:00 PM" />
+          <input type="text" name="buy" placeholder="Buy Eg: 1111" />
+          <input type="text" name="sell" placeholder="Sell Eg: 2222" />
+          <input type="text" name="result" placeholder="Result Eg: 12" />
           <button type="submit">Add</button>
         </form>
       </div>
     </main>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-      function deleteNext(e) {
-        const id = e.getAttribute("data-id");
-        Swal.fire({
-          icon: "warning",
-          text: "Are you sure to delete next result?",
-          showCancelButton: true,
-          confirmButtonText: "Delete",
-          confirmButtonColor: "#ff0000",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            let xmlHttp = null;
-            xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("DELETE", "/panel/next/" + id, false);
-            xmlHttp.send(null);
-            location.href = "/panel/next";
-          }
-        });
-      }
-    </script>
+    <script></script>
   </body>
 </html>

@@ -87,7 +87,7 @@ module.exports.getAlertText = async (req, res) => {
 };
 
 module.exports.getResult = async (req, res) => {
-  const data = await Result.find();
+  const data = await Result.find().sort({ date: -1 });
 
   const grouped = _.mapValues(_.groupBy(data, "date"), (dList) =>
     dList.map((d) => _.omit(d, "date"))

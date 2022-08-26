@@ -226,19 +226,78 @@ module.exports.deleteNext = async (req, res) => {
 };
 
 module.exports.getResult = async (req, res) => {
-  const data = await Result.find().sort({ created_at: -1 });
-  console.log("result", data);
+  const data = await Result.find().sort({ date: -1 });
   res.render("admin/result", { data });
 };
 
-module.exports.addResultPage = async (req, res) => {};
+module.exports.addResultPage = async (req, res) => {
+  res.render("admin/add_result");
+};
 
-module.exports.addResult = async (req, res) => {};
+module.exports.addResult = async (req, res) => {
+  const result = new Result({
+    buy: req.body.buy,
+    sell: req.body.sell,
+    result: req.body.result,
+    date: req.body.date,
+    time: req.body.time,
+  });
+
+  try {
+    const savedResult = await result.save();
+    console.log("saved result", savedResult);
+    res.redirect("/panel/results");
+  } catch (error) {
+    console.log("saved error", error);
+    res.redirect("/panel/results");
+  }
+};
 
 module.exports.updateResult = async (req, res) => {
-  res.render("admin/result");
+  const { _id, buy, sell, result } = req.body;
+  await Result.findOneAndUpdate(
+    { _id: _id },
+    {
+      buy: buy,
+      sell: sell,
+      result: result,
+    }
+  );
+
+  res.redirect("/panel/results");
+};
+
+module.exports.editResultPage = async (req, res) => {
+  const data = await Result.findOne({ _id: req.params.id });
+  if (data) {
+    res.render("admin/edit_result", { data: data });
+  } else {
+    res.redirect("/panel/results");
+  }
 };
 
 module.exports.deleteResult = async (req, res) => {
-  res.render("admin/result");
+  const id = mongoose.Types.ObjectId(req.params.id);
+
+  try {
+    await Result.deleteOne({ _id: id })
+      .then((result) => {
+        console.log(result);
+        res.json({ success: true });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.json({ success: false });
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports.postLogout = async (req, res) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    localStorage.removeItem("token");
+  }
+  res.redirect("/panel");
 };
