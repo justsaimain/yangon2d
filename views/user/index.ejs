@@ -21,18 +21,18 @@
     <main>
       <div class="top-div">
         <div class="live-number">
-          <h1 id="result-data">--</h1>
+          <h1 id="result-data" class="blink">--</h1>
           <p id="date-time-data">🕥 Loading...</p>
         </div>
         <div class="live-board">
           <div class="board">
             <h3>BUY</h3>
-            <p id="buy-data">--</p>
+            <p id="buy-data" class="blink">--</p>
           </div>
           <div class="divider"></div>
           <div class="board">
             <h3>SELL</h3>
-            <p id="sell-data">--</p>
+            <p id="sell-data" class="blink">--</p>
           </div>
         </div>
       </div>
@@ -188,31 +188,31 @@
         if (
           hour.toString() === "9" &&
           minute.toString() === "0" &&
-          second.toString() === "0"
+          second.toString() === "1"
         ) {
           onTheHourFunction();
         } else if (
           hour.toString() === "12" &&
           minute.toString() === "0" &&
-          second.toString() === "0"
+          second.toString() === "1"
         ) {
           onTheHourFunction();
         } else if (
           hour.toString() === "15" &&
           minute.toString() === "0" &&
-          second.toString() === "0"
+          second.toString() === "1"
         ) {
           onTheHourFunction();
         } else if (
           hour.toString() === "17" &&
           minute.toString() === "0" &&
-          second.toString() === "0"
+          second.toString() === "1"
         ) {
           onTheHourFunction();
         } else if (
           hour.toString() === "20" &&
           minute.toString() === "0" &&
-          second.toString() === "0"
+          second.toString() === "1"
         ) {
           onTheHourFunction();
         }

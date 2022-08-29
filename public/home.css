@@ -139,3 +139,18 @@ header {
   align-items: center;
   border-radius: 8px;
 }
+
+.blink {
+  animation: blinker 1.5s linear infinite;
+  -webkit-animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  30% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}

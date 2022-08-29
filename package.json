@@ -21,7 +21,6 @@
     "eslint": "^8.20.0"
   },
   "dependencies": {
-    "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "cronitor": "^2.3.2",
     "crypto": "^1.0.1",
