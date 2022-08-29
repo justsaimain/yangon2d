@@ -5,6 +5,7 @@ const cronitor = require("cronitor")("1d45529fda334b4494186871c5288edc");
 
 cronitor.wraps(cron);
 
+console.log("schedule working...");
 const round_one = cron.schedule(
   "0 9 * * *",
   () => {
@@ -45,7 +46,6 @@ round_one.start();
 round_two.start();
 round_three.start();
 round_four.start();
-round_five.start();
 round_five.start();
 
 CloseDay.find().then((res) => {

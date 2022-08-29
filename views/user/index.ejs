@@ -44,21 +44,36 @@
         <% } %>
         <p>Today Results</p>
         <div class="today-board">
-          <% if (todayData.length > 0) { %> <% todayData.forEach(data => { %>
           <div class="today-board-result">
-            <p>
-              <% if (data.time !== "12:00 PM") { %> &nbsp; <% } %> <%= data.time
-              %>
-            </p>
-            <p><%= data.buy %></p>
-            <p><%= data.sell %></p>
-            <p><%= data.result %></p>
+            <p id="first-result-time">&nbsp; 9:00 AM</p>
+            <p id="first-result-buy">-</p>
+            <p id="first-result-sell">-</p>
+            <p id="first-result">-</p>
           </div>
-          <% }) %> <% } else {%>
-          <p style="text-align: center; color: #808080">
-            Next result will be out soon...
-          </p>
-          <% } %>
+          <div class="today-board-result">
+            <p id="second-result-time">12:00 PM</p>
+            <p id="second-result-buy">-</p>
+            <p id="second-result-sell">-</p>
+            <p id="second-result">-</p>
+          </div>
+          <div class="today-board-result">
+            <p id="third-result-time">&nbsp; 3:00 PM</p>
+            <p id="third-result-buy">-</p>
+            <p id="third-result-sell">-</p>
+            <p id="third-result">-</p>
+          </div>
+          <div class="today-board-result">
+            <p id="fourth-result-time">&nbsp; 5:00 PM</p>
+            <p id="fourth-result-buy">-</p>
+            <p id="fourth-result-sell">-</p>
+            <p id="fourth-result">-</p>
+          </div>
+          <div class="today-board-result">
+            <p id="fifth-result-time">&nbsp; 8:00 PM</p>
+            <p id="fifth-result-buy">-</p>
+            <p id="fifth-result-sell">-</p>
+            <p id="fifth-result">-</p>
+          </div>
         </div>
         <div class="actions">
           <button
@@ -112,6 +127,56 @@
         let data = JSON.parse(xmlHttp.response);
         console.log("Working on exactly at hour");
         console.log("Today data", data);
+
+        document.getElementById("first-result-buy").innerText = data[0]
+          ? data[0].buy
+          : "-";
+        document.getElementById("first-result-sell").innerText = data[0]
+          ? data[0].sell
+          : "-";
+        document.getElementById("first-result").innerText = data[0]
+          ? data[0].result
+          : "-";
+
+        document.getElementById("second-result-buy").innerText = data[1]
+          ? data[1].buy
+          : "-";
+        document.getElementById("second-result-sell").innerText = data[1]
+          ? data[1].sell
+          : "-";
+        document.getElementById("second-result").innerText = data[1]
+          ? data[1].result
+          : "-";
+
+        document.getElementById("third-result-buy").innerText = data[2]
+          ? data[2].buy
+          : "-";
+        document.getElementById("third-result-sell").innerText = data[2]
+          ? data[2].sell
+          : "-";
+        document.getElementById("third-result").innerText = data[2]
+          ? data[2].result
+          : "-";
+
+        document.getElementById("fourth-result-buy").innerText = data[3]
+          ? data[3].buy
+          : "-";
+        document.getElementById("fourth-result-sell").innerText = data[3]
+          ? data[3].sell
+          : "-";
+        document.getElementById("fourth-result").innerText = data[3]
+          ? data[3].result
+          : "-";
+
+        document.getElementById("fifth-result-buy").innerText = data[4]
+          ? data[4].buy
+          : "-";
+        document.getElementById("fifth-result-sell").innerText = data[4]
+          ? data[4].sell
+          : "-";
+        document.getElementById("fifth-result").innerText = data[4]
+          ? data[4].result
+          : "-";
       }
 
       setInterval(function () {
@@ -119,9 +184,7 @@
         const hour = date.getHours();
         const minute = date.getMinutes();
         const second = date.getSeconds();
-        // console.log(
-        //   `${hour.toString()} - ${minute.toString()} - ${second.toString()}`
-        // );
+
         if (
           hour.toString() === "9" &&
           minute.toString() === "0" &&

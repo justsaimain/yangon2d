@@ -1,8 +1,6 @@
-const generateNumber = require("../helpers/generateNumber");
 const CloseDay = require("../models/CloseDay");
-const Next = require("../models/Next");
 const Result = require("../models/Result");
-const moment = require("moment-timezone");
+const liveService = require("../services/liveService");
 const _ = require("lodash");
 
 module.exports.getIndex = async (req, res) => {
@@ -10,54 +8,18 @@ module.exports.getIndex = async (req, res) => {
 };
 
 module.exports.getLive = async (req, res) => {
-  const currentDateTime = moment(new Date())
-    .tz("Asia/Yangon")
-    .format("D-MM-YYYY hh:mm:ss A");
-  const currentDateTimeForCompare = moment(new Date())
-    .tz("Asia/Yangon")
-    .format("MMMM D YYYY, H:mm:ss");
-
-  Next.find().then((result) => {
-    if (result.length > 0) {
-      const data = result[0];
-      console.log("Next Result data ", data);
-      console.log("current > ", new Date(currentDateTimeForCompare));
-      console.log("show data time > ", new Date(data.show_date_time));
-      console.log("delete data time > ", new Date(data.delete_date_time));
-      if (
-        new Date(currentDateTimeForCompare) >= new Date(data.show_date_time) &&
-        new Date(currentDateTimeForCompare) < new Date(data.delete_date_time)
-      ) {
-        returnData = {
-          buy: "1." + data.buy,
-          sell: "3." + data.sell,
-          result: data.buy.slice(-1) + data.sell.slice(-1),
-          date_time: currentDateTime,
-        };
-        console.log("return data > ", returnData);
-        res.status(200).json(returnData);
-      } else if (
-        new Date(currentDateTimeForCompare) > new Date(data.delete_date_time)
-      ) {
-        console.log("✅ Delete result of next...");
-        Next.deleteOne({ _id: data._id })
-          .then(() => {
-            returnData = generateNumber();
-            res.status(200).json(returnData);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        console.log("✅ Show result of random...");
-        returnData = generateNumber();
-        res.status(200).json(returnData);
-      }
-    } else {
-      let returnData = generateNumber();
-      res.status(200).json(returnData);
-    }
-  });
+  try {
+    await liveService
+      .getLive()
+      .then((r) => {
+        res.json(r);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    console.log("error", err);
+  }
 };
 
 module.exports.getTodayResult = async (req, res) => {
