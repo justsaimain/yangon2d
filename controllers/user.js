@@ -26,13 +26,15 @@ module.exports.getIndex = async (req, res) => {
 };
 
 module.exports.getResult = async (req, res) => {
-  const data = await Result.find().sort({ createdAt: 1 });
+  const data = await Result.find().sort({ createdAt: -1 });
 
   const grouped = _.mapValues(_.groupBy(data, "date"), (dList) =>
     dList.map((d) => _.omit(d, "date"))
   );
+  console.log(grouped);
 
   const dateList = _.uniqBy(_.map(data, "date"));
+  console.log(dateList);
 
   res.render("user/result", { results: grouped, date: dateList });
 };
