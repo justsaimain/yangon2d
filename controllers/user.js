@@ -31,6 +31,7 @@ module.exports.getResult = async (req, res) => {
   const grouped = _.mapValues(_.groupBy(data, "date"), (dList) =>
     dList.map((d) => _.omit(d, "date"))
   );
+
   console.log(grouped);
 
   const dateList = _.uniqBy(_.map(data, "date"));

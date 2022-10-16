@@ -128,6 +128,9 @@ module.exports.postNext = async (req, res) => {
       .set({ hour: 9, minute: 0, second: 0, millisecond: 0 })
       .format("MMMM D YYYY, H:mm:ss"),
     moment()
+      .set({ hour: 10, minute: 30, second: 0, millisecond: 0 })
+      .format("MMMM D YYYY, H:mm:ss"),
+    moment()
       .set({ hour: 12, minute: 0, second: 0, millisecond: 0 })
       .format("MMMM D YYYY, H:mm:ss"),
     moment()
@@ -146,7 +149,7 @@ module.exports.postNext = async (req, res) => {
   console.log("current date time", currentDateTime);
   console.log("show date time", showTime);
 
-  if (new Date(currentDateTime) >= new Date(showTime[4])) {
+  if (new Date(currentDateTime) >= new Date(showTime[5])) {
     showDateTime = moment()
       .set({ hour: 9, minute: 0, second: 0, millisecond: 0 })
       .add(1, "days")
@@ -155,30 +158,36 @@ module.exports.postNext = async (req, res) => {
     console.log(
       "🚨 load static data for tomorrow 9 AM before 1 minutes : 8:59 AM"
     );
-  } else if (new Date(currentDateTime) >= new Date(showTime[3])) {
+  } else if (new Date(currentDateTime) >= new Date(showTime[4])) {
     showDateTime = moment()
       .set({ hour: 20, minute: 0, second: 0, millisecond: 0 })
       .subtract(1, "minutes")
       .format("MMMM D YYYY, H:mm:ss");
     console.log("🚨 load static data for 8 PM before 1 minutes : 7:59 PM");
-  } else if (new Date(currentDateTime) >= new Date(showTime[2])) {
+  } else if (new Date(currentDateTime) >= new Date(showTime[3])) {
     showDateTime = moment()
       .set({ hour: 17, minute: 0, second: 0, millisecond: 0 })
       .subtract(1, "minutes")
       .format("MMMM D YYYY, H:mm:ss");
     console.log("🚨 load static data for 5 PM before 1 minutes : 4:59 PM");
-  } else if (new Date(currentDateTime) >= new Date(showTime[1])) {
+  } else if (new Date(currentDateTime) >= new Date(showTime[2])) {
     showDateTime = moment()
       .set({ hour: 15, minute: 0, second: 0, millisecond: 0 })
       .subtract(1, "minutes")
       .format("MMMM D YYYY, H:mm:ss");
     console.log("🚨 load static data for 3 PM before 1 minutes : 2:59 PM");
-  } else if (new Date(currentDateTime) >= new Date(showTime[0])) {
+  } else if (new Date(currentDateTime) >= new Date(showTime[1])) {
     showDateTime = moment()
       .set({ hour: 12, minute: 0, second: 0, millisecond: 0 })
       .subtract(1, "minutes")
       .format("MMMM D YYYY, H:mm:ss");
     console.log("🚨 load static data for 12 PM before 1 minutes : 11:59 AM");
+  } else if (new Date(currentDateTime) >= new Date(showTime[0])) {
+    showDateTime = moment()
+      .set({ hour: 10, minute: 30, second: 0, millisecond: 0 })
+      .subtract(1, "minutes")
+      .format("MMMM D YYYY, H:mm:ss");
+    console.log("🚨 load static data for 10:30 AM before 1 minutes : 10:29 AM");
   } else {
     showDateTime = moment()
       .set({ hour: 9, minute: 0, second: 0, millisecond: 0 })

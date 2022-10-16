@@ -13,6 +13,15 @@ const round_one = cron.schedule(
   },
   { scheduled: true, timezone: "Asia/Yangon" }
 );
+
+const new_round_two = cron.schedule(
+  "31 21 * * *",
+  () => {
+    storeResult("10:30 AM");
+  },
+  { scheduled: true, timezone: "Asia/Yangon" }
+);
+
 const round_two = cron.schedule(
   "0 12 * * *",
   () => {
@@ -43,6 +52,7 @@ const round_five = cron.schedule(
 );
 
 round_one.start();
+new_round_two.start();
 round_two.start();
 round_three.start();
 round_four.start();
@@ -61,6 +71,10 @@ CloseDay.find().then((res) => {
       if (off.time === "9:00 AM") {
         round_one.stop();
         console.log("Today 9:00 AM is closed");
+      }
+      if (off.time === "10:30 AM") {
+        round_one.stop();
+        console.log("Today 10:30 AM is closed");
       }
       if (off.time === "12:00 PM") {
         round_two.stop();

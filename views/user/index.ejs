@@ -51,6 +51,12 @@
             <p id="first-result">-</p>
           </div>
           <div class="today-board-result">
+            <p id="new-first-result-time">10:30 AM</p>
+            <p id="new-first-result-buy">-</p>
+            <p id="new-first-result-sell">-</p>
+            <p id="new-first-result">-</p>
+          </div>
+          <div class="today-board-result">
             <p id="second-result-time">12:00 PM</p>
             <p id="second-result-buy">-</p>
             <p id="second-result-sell">-</p>
@@ -102,11 +108,13 @@
           minute: "numeric",
           hour12: true,
         });
-        // console.log("Time : " + time);
+
+        console.log("Time : " + time);
         getTodayData();
       }
 
       function getLiveData() {
+        console.log("getting live data");
         let xmlHttp = null;
         xmlHttp = new XMLHttpRequest();
         xmlHttp.open("GET", "/api/live", false);
@@ -128,55 +136,77 @@
         // console.log("Working on exactly at hour");
         // console.log("Today data", data);
 
-        document.getElementById("first-result-buy").innerText = data[0]
-          ? data[0].buy
-          : "-";
-        document.getElementById("first-result-sell").innerText = data[0]
-          ? data[0].sell
-          : "-";
-        document.getElementById("first-result").innerText = data[0]
-          ? data[0].result
-          : "-";
+        if (data[0]) {
+          document.getElementById("first-result-buy").innerText = data[0]
+            ? data[0].buy
+            : "-";
+          document.getElementById("first-result-sell").innerText = data[0]
+            ? data[0].sell
+            : "-";
+          document.getElementById("first-result").innerText = data[0]
+            ? data[0].result
+            : "-";
+        }
 
-        document.getElementById("second-result-buy").innerText = data[1]
-          ? data[1].buy
-          : "-";
-        document.getElementById("second-result-sell").innerText = data[1]
-          ? data[1].sell
-          : "-";
-        document.getElementById("second-result").innerText = data[1]
-          ? data[1].result
-          : "-";
+        if (data[1]) {
+          document.getElementById("new-first-result-buy").innerText = data[0]
+            ? data[1].buy
+            : "-";
+          document.getElementById("new-first-result-sell").innerText = data[0]
+            ? data[1].sell
+            : "-";
+          document.getElementById("new-first-result").innerText = data[0]
+            ? data[1].result
+            : "-";
+        }
 
-        document.getElementById("third-result-buy").innerText = data[2]
-          ? data[2].buy
-          : "-";
-        document.getElementById("third-result-sell").innerText = data[2]
-          ? data[2].sell
-          : "-";
-        document.getElementById("third-result").innerText = data[2]
-          ? data[2].result
-          : "-";
+        if (data[2]) {
+          document.getElementById("second-result-buy").innerText = data[1]
+            ? data[2].buy
+            : "-";
+          document.getElementById("second-result-sell").innerText = data[1]
+            ? data[2].sell
+            : "-";
+          document.getElementById("second-result").innerText = data[1]
+            ? data[2].result
+            : "-";
+        }
 
-        document.getElementById("fourth-result-buy").innerText = data[3]
-          ? data[3].buy
-          : "-";
-        document.getElementById("fourth-result-sell").innerText = data[3]
-          ? data[3].sell
-          : "-";
-        document.getElementById("fourth-result").innerText = data[3]
-          ? data[3].result
-          : "-";
+        if (data[3]) {
+          document.getElementById("third-result-buy").innerText = data[2]
+            ? data[3].buy
+            : "-";
+          document.getElementById("third-result-sell").innerText = data[2]
+            ? data[3].sell
+            : "-";
+          document.getElementById("third-result").innerText = data[2]
+            ? data[3].result
+            : "-";
+        }
 
-        document.getElementById("fifth-result-buy").innerText = data[4]
-          ? data[4].buy
-          : "-";
-        document.getElementById("fifth-result-sell").innerText = data[4]
-          ? data[4].sell
-          : "-";
-        document.getElementById("fifth-result").innerText = data[4]
-          ? data[4].result
-          : "-";
+        if (data[4]) {
+          document.getElementById("fourth-result-buy").innerText = data[3]
+            ? data[4].buy
+            : "-";
+          document.getElementById("fourth-result-sell").innerText = data[3]
+            ? data[4].sell
+            : "-";
+          document.getElementById("fourth-result").innerText = data[3]
+            ? data[4].result
+            : "-";
+        }
+
+        if (data[5]) {
+          document.getElementById("fifth-result-buy").innerText = data[4]
+            ? data[5].buy
+            : "-";
+          document.getElementById("fifth-result-sell").innerText = data[4]
+            ? data[5].sell
+            : "-";
+          document.getElementById("fifth-result").innerText = data[4]
+            ? data[5].result
+            : "-";
+        }
       }
 
       setInterval(function () {
