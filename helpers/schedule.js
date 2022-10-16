@@ -15,7 +15,7 @@ const round_one = cron.schedule(
 );
 
 const new_round_two = cron.schedule(
-  "31 21 * * *",
+  "30 10 * * *",
   () => {
     storeResult("10:30 AM");
   },
